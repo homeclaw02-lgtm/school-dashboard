@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 21 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 23 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-03-09");
+const TODAY = new Date("2026-03-10");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -217,13 +217,16 @@ const EMAILS = [
   { id:19, category:"\ud83d\udccb School Policies", subject:"Sick Policy Reminder", from:"Excelsior", date:"Jan 13, 2026", deadline:null, urgent:false, body:"Students must be symptom-free for 48 hours before returning. If anyone in the household has a stomach bug, keep ALL students home until the entire household has been 48 hours symptom-free.", tags:["Policy","Health"] },
   { id:20, category:"\ud83d\udccb School Policies", subject:"First Semester Progress Reports", from:"Excelsior", date:"Dec 14, 2025", deadline:"2026-01-11", urgent:false, past:true, body:"Progress reports available Dec 15 in FACTS portal. K4\u20133rd emailed separately. 4th\u20138th and HS: go to FACTS portal > Grades > Mid-Term Progress Report. Report link expired Jan 11, 2026.", tags:["Grades","Progress Report","Past"] },
   { id:21, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Columbia Fireflies Reading Program 2026", from:"Nichole Coffey", date:"Mar 3, 2026", deadline:"2026-04-01", urgent:false, body:"Spring reading program with the Columbia Fireflies baseball team! Track your student\u2019s reading from March 3 to April 1 using the attached reading log. Students who complete the log earn a free ticket + free hot dog and soda at the Fireflies game. Excelsior will attend the Thursday, April 9th game \u2014 open to ALL ages. Email Lorin Fairweather (lorinfairweather@gmail.com) with questions. Watch for a surprise visit from Mason the Firefly mascot!", tags:["\u26be Reading Program","All Ages","April 9 Game"], attachment:"Fireflies Reading Program 2026.pdf" },
+  { id:22, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 3/24", from:"Tricia Heen", date:"Mar 10, 2026", deadline:"2026-03-24", urgent:false, body:"Homework is up in the portal. Please let me know if you have any questions. Enjoy your break!", tags:["Homework","Grade 8","After Break"] },
+  { id:23, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Spring Break \u2014 No Classes 3/16\u20133/20", from:"Nichole Coffey", date:"Mar 10, 2026", deadline:"2026-03-16", urgent:false, body:"Spring Break is next week, March 16\u201320. There will be NO CLASSES. Classes resume on Tuesday, March 24.", tags:["Spring Break","No Classes","3/16\u20133/20"] },
 ];
 
 let activeCategory = "ALL";
 let showPast = false;
 let showCompleted = false;
 let expandedId = null;
-let completedIds = new Set(/* COMPLETED_IDS_START */[]/* COMPLETED_IDS_END */);
+let completedIds = new Set(/* COMPLETED_IDS_START */[1,15]/* COMPLETED_IDS_END */);
+let dirty = false;
 
 function daysUntil(dateStr) {
   if (!dateStr) return null;
@@ -268,6 +271,7 @@ function toggleComplete(id, e) {
     // Collapse the card if it was open
     if (expandedId === id) expandedId = null;
   }
+  dirty = true;
   render();
 }
 
@@ -284,6 +288,8 @@ function saveUpdates() {
     'mailto:homeclaw02@gmail.com?subject=' +
     encodeURIComponent(subject) + '&body=' + encodeURIComponent(body)
   );
+  dirty = false;
+  render();
   showToast('\u2709\ufe0f Email opened \u2014 send it to save your progress!');
 }
 
@@ -334,7 +340,7 @@ function render() {
   }).length;
   document.getElementById("urgentCount").textContent = urgentCount;
   document.getElementById("weekCount").textContent = weekCount;
-  document.getElementById("saveBtn").style.display = completedIds.size > 0 ? "inline-flex" : "none";
+  document.getElementById("saveBtn").style.display = dirty ? "inline-flex" : "none";
 
   if (filtered.length === 0) {
     document.getElementById("emailList").innerHTML = '<div class="empty">No emails in this category.</div>';
