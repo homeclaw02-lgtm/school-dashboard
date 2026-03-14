@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 28 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 29 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-03-13");
+const TODAY = new Date("2026-03-14");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -224,13 +224,14 @@ const EMAILS = [
   { id:26, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Parent Assessment for History Comes Alive Project", from:"Blaire Blagg", date:"Mar 11, 2026", deadline:"2026-03-16", urgent:false, body:"Please complete the Parent Evaluation for your student\u2019s History Comes Alive Project by Monday, March 16. Mrs. Blagg is grading projects and needs parent scores to finalize grades. Great work to all students!", tags:["History","Parent Evaluation","Due Mar 16"] },
   { id:27, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 3/26", from:"Tricia Heen", date:"Mar 12, 2026", deadline:"2026-03-26", urgent:false, body:"Assignments are in the portal. Enjoy your break! \u2014 Mrs. Heen, 8th Grade Instructor", tags:["Homework","Grade 8","After Break"] },
   { id:28, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"End of Year Book Sale \u2014 May 19", from:"Excelsior", date:"Mar 12, 2026", deadline:"2026-05-19", urgent:false, body:"Annual book sale on Tuesday, May 19 at New Heights Church cafeteria, 9am\u20131pm. Educational items and curriculum welcome. Sign up to sell (limited to first 20 spots) via Google Form \u2014 no sign-up needed to browse and buy. Spring break is a great time to sort through items! Questions? Contact Heather Hook at seaturtlebaby@gmail.com", tags:["Book Sale","School Event","May 19"] },
+  { id:29, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 6pm SOLD OUT, 7:15pm Show Possible", from:"Klaire Raines", date:"Mar 13, 2026", deadline:null, urgent:false, body:"The 6:00 showing of Jungle Book KIDS is sold out! Due to continued interest, a second 7:15pm performance is being considered \u2014 students would finish around 7:45pm. If no conflicts, ticket sales for the 7:15 show may open soon. Note: you\u2019ll need separate tickets if staying for both shows (fire code occupancy limits).", tags:["Drama","Jungle Book Kids","Second Show"] },
 ];
 
 let activeCategory = "ALL";
 let showPast = false;
 let showCompleted = false;
 let expandedId = null;
-let completedIds = new Set(/* COMPLETED_IDS_START */[1,5,6,8,9,10,15,16,17,19,21,23]/* COMPLETED_IDS_END */);
+let completedIds = new Set(/* COMPLETED_IDS_START */[1,5,6,8,9,10,14,15,16,17,19,21,23,25,26,28]/* COMPLETED_IDS_END */);
 let dirty = false;
 
 function daysUntil(dateStr) {
