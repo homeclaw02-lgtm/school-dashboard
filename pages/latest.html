@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 32 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 33 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-03-23");
+const TODAY = new Date("2026-03-24");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -228,6 +228,7 @@ const EMAILS = [
   { id:30, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"New Performance Added \u2014 Jungle Book Kids 7:15pm Show", from:"Excelsior", date:"Mar 14, 2026", deadline:"2026-03-27", urgent:false, body:"The 7:15pm performance of Jungle Book KIDS is confirmed and tickets are now on sale! Tickets are $5 each via Zeffy \u2014 no tickets at the door. E-ticket required for entry. If you already have 6:00pm tickets and want to stay for the 7:15 show, you\u2019ll need separate tickets (fire code occupancy limits). Secure your seats before they sell out!", tags:["Drama","Jungle Book Kids","Tickets","7:15pm Show"], link:"https://www.zeffy.com/en-US/ticketing/jungle-book-kids" },
   { id:31, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 Important Show Info & Call Time", from:"Klaire Raines", date:"Mar 15, 2026", deadline:"2026-03-27", urgent:false, body:"Important details for the March 27 performances (6:00 & 7:15pm): Students must be dropped off at 4:30pm for costume prep. Doors open at 5:45 & 7:00pm. No ticket, no entry \u2014 have your e-ticket ready to scan. $20 costume/set fee per student due by March 26 via Venmo (@Excelsior_Academy_SC) or exact cash/check to Mrs. Vickery. See costume requirements doc for your student\u2019s role.", tags:["Drama","Jungle Book Kids","Call Time 4:30pm","\ud83d\udcb5 $20 Fee Due Mar 26"], attachment:"TJB Kids Costume Requirements.pdf" },
   { id:32, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"E! Field Day T-Shirt Purchase Confirmation", from:"Excelsior Academy (Zeffy)", date:"Mar 21, 2026", deadline:null, urgent:false, body:"\u2705 Purchase confirmed: 1 x YL T-Shirt + 1 x Adult Medium T-Shirt for $30. Pickup date TBD \u2014 Excelsior will send details next month. Payment via Apple Pay/Google Pay.", tags:["Field Day","\u2705 T-Shirts Purchased"] },
+  { id:33, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book KIDS \u2014 Last Chance Tickets (7:15pm)", from:"Excelsior", date:"Mar 23, 2026", deadline:"2026-03-27", urgent:true, body:"Jungle Book KIDS is this Friday night! Tickets still available for the 7:15pm performance. Tickets are $5 each via Zeffy \u2014 no tickets at the door. E-ticket required for entry. If you already have 6:00pm tickets and want to stay for 7:15pm, you\u2019ll need separate tickets (fire code occupancy limits). Once sold out, they\u2019re gone!", tags:["Drama","Jungle Book Kids","Tickets","7:15pm Show"], link:"https://www.zeffy.com/en-US/ticketing/jungle-book-kids" },
 ];
 
 let activeCategory = "ALL";
