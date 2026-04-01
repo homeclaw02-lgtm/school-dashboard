@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 43 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 47 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-03-31");
+const TODAY = new Date("2026-04-01");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -239,6 +239,10 @@ const EMAILS = [
   { id:41, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Madagascar Jr. \u2014 Costume Requirements", from:"Klaire Raines", date:"Mar 27, 2026", deadline:"2026-04-09", urgent:false, body:"Costume requirements for Madagascar Jr. are out! Find your student\u2019s name in the attached chart and prepare all required clothing items (no large logos/writing). $50 costume/set fee due by April 9 via Venmo (@Excelsior_Academy_SC) or exact cash/check to Mrs. Vickery. Yearbook pictures in costume on April 9 \u2014 bring all items that day! Girls need hair done in requested style. Bring items to every dress rehearsal (4/9, 4/16, 4/21, 4/23 and shows). Keep everything in a \u201cdrama bag\u201d with extra deodorant. Stage makeup not needed until 4/23.", tags:["Drama","Madagascar Jr.","Costumes","\ud83d\udcb5 $50 Fee Due Apr 9"], attachment:"Madagascar Jr. Costume Requirements.pdf" },
   { id:42, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Excelsior Spring Formal", from:"Tricia Heen", date:"Mar 30, 2026", deadline:null, urgent:false, body:"Details for the Excelsior Spring Formal are out! Purchase tickets via Zeffy. See the attached flyer for full event details including date, time, dress code, and more. Contact Mrs. Heen with questions.", tags:["Event","Spring Formal","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/excelsior-spring-formal", attachment:"Excelsior Prom Info.docx" },
   { id:43, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Guess How Many Jelly Beans!", from:"Excelsior", date:"Mar 30, 2026", deadline:null, urgent:false, body:"It\u2019s jelly bean guessing time! \ud83c\udf89 Since Easter is right around the corner, there\u2019s a jar of colorful jelly beans in the front lobby. Students can grab a slip of paper at the guessing table, write down their guess, and fill out all their information. The closest guess wins a yummy treat! Good luck!", tags:["Event","Easter","Fun Activity"] },
+  { id:44, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"First Tuesday Snacks \u2014 April 7", from:"Tricia Heen", date:"Mar 31, 2026", deadline:"2026-04-07", urgent:false, body:"Next week is the first Tuesday of the month, so please bring a snack to share with the class if you\u2019d like. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Snack Day","Grade 8"] },
+  { id:45, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 4/9", from:"Tricia Heen", date:"Mar 31, 2026", deadline:"2026-04-09", urgent:false, body:"Assignments are up in the portal. Please make sure you have ordered your copy of The Hobbit study guide. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8"] },
+  { id:46, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"IMPORTANT: Drop Off Time Change \u2014 Tuesday, April 7", from:"Nichole Coffey", date:"Mar 31, 2026", deadline:"2026-04-07", urgent:true, body:"Muffins for Mom is on Tuesday, April 7 at 9:15 AM. If you are NOT participating in Muffins for Mom, please do not drop off your child until 10 AM so all staff moms can participate. At 10am, students go to the class they would be in BEFORE chapel. There will be no chapel that day.", tags:["Event","Muffins for Mom","\u26a0\ufe0f Late Drop Off"] },
+  { id:47, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Yearbook 2025\u20132026 \u2014 Order & Personal Pages", from:"Excelsior", date:"Mar 31, 2026", deadline:"2026-04-12", urgent:false, body:"Yearbook is being finalized! About 2 weeks left to order and create personal pages. Every child gets 2 free personal pages \u2014 additional pages in sets of 2 for $1. Personal pages must be completed by April 12th. Purchase anytime via TreeRing app or treering.com/validate with school code 1016588451503447. Photos needed from Neon Day and field trips \u2014 text to Natalie Epperson at 601-201-9202. Questions: Nepps08@gmail.com", tags:["Yearbook","Order by Apr 12"] },
 ];
 
 let activeCategory = "ALL";
