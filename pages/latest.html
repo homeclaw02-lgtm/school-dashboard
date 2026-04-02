@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 47 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 49 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-01");
+const TODAY = new Date("2026-04-02");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -243,6 +243,8 @@ const EMAILS = [
   { id:45, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 4/9", from:"Tricia Heen", date:"Mar 31, 2026", deadline:"2026-04-09", urgent:false, body:"Assignments are up in the portal. Please make sure you have ordered your copy of The Hobbit study guide. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8"] },
   { id:46, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"IMPORTANT: Drop Off Time Change \u2014 Tuesday, April 7", from:"Nichole Coffey", date:"Mar 31, 2026", deadline:"2026-04-07", urgent:true, body:"Muffins for Mom is on Tuesday, April 7 at 9:15 AM. If you are NOT participating in Muffins for Mom, please do not drop off your child until 10 AM so all staff moms can participate. At 10am, students go to the class they would be in BEFORE chapel. There will be no chapel that day.", tags:["Event","Muffins for Mom","\u26a0\ufe0f Late Drop Off"] },
   { id:47, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Yearbook 2025\u20132026 \u2014 Order & Personal Pages", from:"Excelsior", date:"Mar 31, 2026", deadline:"2026-04-12", urgent:false, body:"Yearbook is being finalized! About 2 weeks left to order and create personal pages. Every child gets 2 free personal pages \u2014 additional pages in sets of 2 for $1. Personal pages must be completed by April 12th. Purchase anytime via TreeRing app or treering.com/validate with school code 1016588451503447. Photos needed from Neon Day and field trips \u2014 text to Natalie Epperson at 601-201-9202. Questions: Nepps08@gmail.com", tags:["Yearbook","Order by Apr 12"] },
+  { id:48, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"The Hobbit Study Guide \u2014 Purchase or Copy Fee", from:"Tricia Heen", date:"Apr 1, 2026", deadline:null, urgent:false, body:"You may purchase The Hobbit study guide (published by Progeny Press) for your student, or pay a $10 copy fee and Mrs. Heen will provide the material needed. Email Mrs. Heen at tricia.heen@excelsioracademy.org if you\u2019d like to pay the fee.", tags:["Literature","Grade 8","The Hobbit"] },
+  { id:49, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Spring Formal \u2014 Ticket Purchase Confirmation", from:"Excelsior Academy (Zeffy)", date:"Apr 1, 2026", deadline:null, urgent:false, body:"\u2705 1 x General Admission purchased for $65. A parental consent form will be sent that must be signed and returned \u2014 students will NOT be allowed onto the boat without it. Ladies must submit a picture of their dress to excelsioracademyedu@gmail.com for approval.", tags:["Event","Spring Formal","\u2705 Ticket Purchased"] },
 ];
 
 let activeCategory = "ALL";
