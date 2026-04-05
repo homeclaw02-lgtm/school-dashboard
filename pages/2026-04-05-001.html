@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Excelsior Academy — School Email Hub</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; background: #f5f4f0; min-height: 100vh; padding-bottom: 48px; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #1a3250 0%, #26508a 100%); color: #fff; padding: 24px 16px 20px; box-shadow: 0 3px 14px rgba(0,0,0,0.22); }
+  .header-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 14px; }
+  .school-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #93c5fd; margin-bottom: 4px; }
+  .header h1 { font-size: 26px; font-weight: 700; }
+  .header-sub { font-size: 12px; color: #bfdbfe; margin-top: 4px; }
+  .stats { display: flex; gap: 10px; }
+  .stat-box { border-radius: 10px; padding: 8px 14px; text-align: center; min-width: 60px; }
+  .stat-box.urgent { background: rgba(239,68,68,0.18); border: 1px solid rgba(239,68,68,0.4); }
+  .stat-box.week { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.35); }
+  .stat-num { font-size: 22px; font-weight: 700; }
+  .stat-box.urgent .stat-num { color: #fca5a5; }
+  .stat-box.week .stat-num { color: #fde68a; }
+  .stat-label { font-size: 9px; letter-spacing: 1px; margin-top: 1px; }
+  .stat-box.urgent .stat-label { color: #fca5a5; }
+  .stat-box.week .stat-label { color: #fde68a; }
+
+  /* FILTER BAR */
+  .filters { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 10px 16px; position: sticky; top: 0; z-index: 10; }
+  .filters-inner { max-width: 860px; margin: 0 auto; display: flex; flex-wrap: nowrap; gap: 8px; align-items: center; justify-content: space-between; }
+  .filter-scroll { display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex: 1; padding: 2px 0; }
+  .filter-scroll::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; font-family: Georgia, serif; border: 2px solid #e5e7eb; background: #f9fafb; color: #6b7280; transition: all 0.12s; white-space: nowrap; flex-shrink: 0; }
+  .tab-btn:hover { border-color: #cbd5e1; }
+  .tab-btn.active { font-weight: 700; }
+  .toggle-btns { display: flex; gap: 6px; flex-shrink: 0; }
+  .toggle-btn { padding: 5px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; font-family: Georgia, serif; border: 2px solid #e5e7eb; background: #f9fafb; color: #6b7280; transition: all 0.12s; white-space: nowrap; flex-shrink: 0; }
+  .toggle-btn.on { border-color: #f59e0b; background: #fef3c7; color: #92400e; font-weight: 600; }
+  .toggle-btn.on-green { border-color: #22c55e; background: #dcfce7; color: #15803d; font-weight: 600; }
+
+  /* EMAIL LIST */
+  .list { max-width: 860px; margin: 14px auto 0; padding: 0 16px; display: flex; flex-direction: column; gap: 10px; }
+  .card { border-radius: 10px; border: 1px solid #e5e7eb; border-left-width: 5px; background: #fff; cursor: pointer; transition: all 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.09); }
+  .card.open { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .card.past { opacity: 0.7; }
+  .card.done { opacity: 0.55; }
+  .card.done .card-subject { text-decoration: line-through; color: #6b7280; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 12px 10px; gap: 8px; }
+  .card-left { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 0; }
+  .urgent-dot { width: 9px; height: 9px; border-radius: 50%; background: #ef4444; margin-top: 6px; flex-shrink: 0; box-shadow: 0 0 0 3px #fee2e2; }
+  .card-subject { font-size: 15px; font-weight: 700; color: #111827; margin-bottom: 3px; line-height: 1.3; }
+  .card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 6px; font-size: 12px; }
+  .cat-label { font-size: 11px; font-weight: 700; }
+  .meta-dot { color: #d1d5db; }
+  .from-label { color: #6b7280; }
+  .date-label { color: #9ca3af; }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; border-width: 1px; border-style: solid; }
+  .card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+  .badge { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .badge.past-badge { background: #f3f4f6; color: #9ca3af; }
+  .badge.today { background: #fee2e2; color: #dc2626; }
+  .badge.urgent-badge { background: #fef3c7; color: #b45309; }
+  .badge.soon { background: #dcfce7; color: #166534; }
+  .badge.done-badge { background: #dcfce7; color: #15803d; }
+  .chevron { font-size: 11px; color: #9ca3af; }
+  .card-body { padding: 12px 14px 14px; border-top-width: 1px; border-top-style: solid; }
+  .body-text { font-size: 14px; color: #374151; line-height: 1.7; }
+  .attach-pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; background: #fff; border-radius: 7px; padding: 5px 11px; font-size: 12px; font-weight: 600; border-width: 1px; border-style: solid; }
+  .card-link { display: block; margin-top: 8px; font-size: 12px; color: #2563eb; word-break: break-all; }
+  .empty { text-align: center; color: #9ca3af; padding: 48px; font-size: 15px; }
+  .hidden { display: none; }
+
+  /* COMPLETE BUTTON */
+  .complete-btn {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid #d1d5db; background: transparent;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: #9ca3af; transition: all 0.15s; flex-shrink: 0;
+    font-family: Georgia, serif; line-height: 1;
+  }
+  .complete-btn:hover { border-color: #22c55e; color: #22c55e; background: #f0fdf4; }
+  .complete-btn.done { border-color: #22c55e; background: #22c55e; color: #fff; }
+
+  /* SAVE UPDATES BUTTON */
+  .save-btn {
+    padding: 5px 14px; border-radius: 20px; font-size: 12px; cursor: pointer;
+    font-family: Georgia, serif; border: 2px solid #f59e0b; background: #fef3c7;
+    color: #92400e; font-weight: 700; white-space: nowrap; flex-shrink: 0;
+    transition: all 0.15s; display: none;
+    animation: savePulse 2s ease-in-out infinite;
+  }
+  .save-btn:hover { background: #fde68a; border-color: #d97706; }
+  @keyframes savePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
+    50%       { box-shadow: 0 0 0 5px rgba(245,158,11,0); }
+  }
+
+  /* SAVE TOAST */
+  .save-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: #1a3250; color: #fff; padding: 10px 20px; border-radius: 20px;
+    font-size: 13px; font-family: Georgia, serif; font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 100;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .save-toast.show { opacity: 1; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .header { padding: 18px 14px 16px; }
+    .header h1 { font-size: 20px; }
+    .header-inner { gap: 10px; }
+    .stats { gap: 8px; }
+    .stat-box { padding: 6px 10px; min-width: 52px; }
+    .stat-num { font-size: 18px; }
+    .stat-label { font-size: 8px; }
+    .filters { padding: 8px 12px; }
+    .tab-btn { padding: 4px 10px; font-size: 11px; }
+    .toggle-btn { padding: 4px 10px; font-size: 11px; }
+    .list { padding: 0 10px; margin-top: 10px; gap: 8px; }
+    .card-top { padding: 10px 10px 8px; }
+    .card-subject { font-size: 14px; }
+    .card-meta { font-size: 11px; gap: 3px; }
+    .cat-label { font-size: 10px; }
+    .tag { font-size: 9px; padding: 1px 6px; }
+    .badge { font-size: 10px; padding: 2px 7px; }
+    .card-body { padding: 10px 12px 12px; }
+    .body-text { font-size: 13px; }
+    .complete-btn { width: 24px; height: 24px; font-size: 12px; }
+  }
+
+  @media (max-width: 380px) {
+    .header h1 { font-size: 18px; }
+    .header-sub { font-size: 11px; }
+    .school-label { font-size: 9px; letter-spacing: 3px; }
+    .card-subject { font-size: 13px; }
+    .from-label, .date-label { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <div class="school-label">Excelsior Academy</div>
+      <h1>School Email Hub</h1>
+      <div class="header-sub">Adam Scott &middot; 53 emails organized by priority</div>
+    </div>
+    <div class="stats">
+      <div class="stat-box urgent">
+        <div class="stat-num" id="urgentCount">0</div>
+        <div class="stat-label">URGENT</div>
+      </div>
+      <div class="stat-box week">
+        <div class="stat-num" id="weekCount">0</div>
+        <div class="stat-label">THIS WEEK</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="filters-inner">
+    <div class="filter-scroll" id="filterTabs"></div>
+    <div class="toggle-btns">
+      <button class="save-btn" id="saveBtn" onclick="saveUpdates()">&#128393; Save Updates</button>
+      <button class="toggle-btn" id="toggleCompleted" onclick="toggleCompleted()">&#10003; Show Done</button>
+      <button class="toggle-btn" id="togglePast" onclick="togglePast()">&#9654; Show Past</button>
+    </div>
+  </div>
+</div>
+
+<div class="list" id="emailList"></div>
+<div class="save-toast" id="saveToast"></div>
+
+<script>
+const TODAY = new Date("2026-04-05");
+
+const CAT_COLORS = {
+  "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
+  "\ud83c\udfad Drama \u2014 Klaire Raines":      { bg:"#fdf4ff", border:"#d946ef", accent:"#7e22ce", pill:"#fae8ff" },
+  "\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior":   { bg:"#eff6ff", border:"#3b82f6", accent:"#1e40af", pill:"#dbeafe" },
+  "\ud83d\udcb0 Tuition & Enrollment":       { bg:"#f0fdf4", border:"#22c55e", accent:"#15803d", pill:"#dcfce7" },
+  "\ud83d\udccb School Policies":            { bg:"#f9fafb", border:"#94a3b8", accent:"#475569", pill:"#f1f5f9" },
+};
+
+const CAT_ORDER = [
+  "\ud83d\udcda Grade 8 \u2014 Mrs. Heen",
+  "\ud83c\udfad Drama \u2014 Klaire Raines",
+  "\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior",
+  "\ud83d\udcb0 Tuition & Enrollment",
+  "\ud83d\udccb School Policies",
+];
+
+const EMAILS = [
+  { id:1, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 3/10", from:"Tricia Heen", date:"Mar 3, 2026", deadline:"2026-03-10", urgent:true, body:"Assignments are in the portal. Financial literacy activity due next week! Next week is snack day \u2014 bring a snack to share if you\u2019d like.", tags:["Homework","Grade 8"] },
+  { id:2, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 3/12", from:"Tricia Heen", date:"Mar 5, 2026", deadline:"2026-03-12", urgent:true, body:"Homework is posted on the portal. Contact Mrs. Heen with any questions or concerns.", tags:["Homework","Grade 8"] },
+  { id:3, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Literature Questions \u2014 Men of Iron", from:"Tricia Heen", date:"Feb 9, 2026", deadline:null, urgent:false, body:"Some links for Men of Iron questions weren\u2019t accessible. Try searching via a search engine, or she\u2019ll go over them in class.", tags:["Literature","Grade 8"] },
+  { id:4, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"History Worksheets \u2014 William the Conqueror", from:"Tricia Heen", date:"Feb 16, 2026", deadline:null, urgent:false, body:"History packet handed out in class. First sheet: \u201cWilliam the Conqueror and the Defeat of England Webquest.\u201d Contact Mrs. Heen if you cannot find it.", tags:["History","Grade 8"] },
+  { id:5, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Advanced Drama \u2014 Rehearsal Schedule (Spring)", from:"Klaire Raines", date:"Mar 8, 2026", deadline:"2026-03-17", urgent:true, body:"Thursday rehearsals now added this week! Spring Break rehearsal on Tuesday, March 17, 10:00am\u20132:30pm. Full attendance expected unless sick or pre-excused. Madagascar Spring Schedule attached.", tags:["Drama","Rehearsal","Spring Break"], attachment:"Madagascar Spring Schedule.pdf" },
+  { id:6, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 Show Semester Kickoff", from:"Klaire Raines", date:"Jan 20, 2026", deadline:null, urgent:false, body:"Choreography has started! In-class videos uploaded to Google Drive weekly (6th/7th & 4th/5th folders). Students must practice at home. Ticket info to come later.", tags:["Drama","Jungle Book Kids"] },
+  { id:7, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 Costume Requirements", from:"Klaire Raines", date:"Feb 28, 2026", deadline:null, urgent:false, body:"Costume list attached \u2014 find your student\u2019s role and prepare their items. No big logos/words on clothing. Older girls: cami tank recommended under costume. Reply \u2018GOT IT\u2019 to confirm you\u2019ve read this.", tags:["Drama","Jungle Book Kids","Costumes"], attachment:"TJB Kids Costume Requirements.pdf" },
+  { id:8, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Shoes for Madagascar Jr!", from:"Klaire Raines", date:"Feb 24, 2026", deadline:null, urgent:false, body:"Lionesses: black jazz shoes. Zoo Guests/Lemurs/Servers/Foosa: black jazz or sneakers (no thick platform). Zoosters/Penguins/Zookeepers: already notified. Start wearing shoes to rehearsal now!", tags:["Drama","Madagascar Jr.","Costumes"] },
+  { id:9, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 TICKETS ON SALE", from:"Klaire Raines", date:"Mar 4, 2026", deadline:null, urgent:false, body:"Tickets are $5 each at zeffy.com. No tickets sold at the door \u2014 e-ticket required. Share the link with family & friends. Secure your seats before they sell out!", tags:["Drama","Jungle Book Kids","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/jungle-book-kids" },
+  { id:10, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 Ticket Confirmation", from:"Excelsior Academy (Zeffy)", date:"Mar 8, 2026", deadline:null, urgent:false, body:"\u2705 2 x General Admission purchased for $10 total. Doors open at 5:30pm. Have e-tickets ready to show upon arrival.", tags:["Drama","Jungle Book Kids","\u2705 Tickets Purchased"] },
+  { id:11, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"History Comes Alive Event", from:"Blaire Blagg", date:"Mar 4, 2026", deadline:"2026-03-07", urgent:false, past:true, body:"Event at Saluda Shoals River Center. Student needed costume + presentation board, arrive by 9:45am. Major project grade. Evaluations via Google Form QR code by guest visitors.", tags:["History","Major Grade","Past Event"], attachment:"history comes alive 2.jpg" },
+  { id:12, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Richland Library Field Trip", from:"Nichole Coffey", date:"Mar 3, 2026", deadline:"2026-03-06", urgent:false, past:true, body:"Free field trip to Richland Library. Children\u2019s Room (under 12) and Teen Center (12\u201318, max 20 teens). Story time, puppet show, and exploration. Started at 10am, ~1.25 hrs.", tags:["Field Trip","All Ages","Past Event"] },
+  { id:13, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Iowa Testing \u2014 May 8", from:"Excelsior", date:"Feb 10, 2026", deadline:"2026-05-08", urgent:false, past:false, body:"Iowa Testing on Friday, May 8. Basic ($55): reading, grammar, math, spelling \u2014 9am to 1pm. Complete Battery ($65): adds science, social studies, reference skills \u2014 9am to 3pm. Sign-up deadline was Feb 27; contact school if needed.", tags:["Testing","3rd\u201312th Grade","May 8"] },
+  { id:14, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Advanced Drama 2026-2027 Wait List", from:"Ashlee & Gail", date:"Mar 3, 2026", deadline:null, urgent:false, body:"Your student has been placed on the waitlist for Advanced Drama 2026-2027. 6th grade and many 7th grade students waitlisted due to high interest. Will be notified if a spot opens.", tags:["Drama","2026-2027","Waitlist"] },
+  { id:15, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Ice Cream Truck \u2014 Tuesday Mar 10", from:"Excelsior", date:"Mar 8, 2026", deadline:"2026-03-10", urgent:true, body:"Relaxin Heifer Ice Cream Truck coming THIS Tuesday during lunch! Single scoop: $5 bowl / $6 cone. Double scoop: $7 bowl / $8 cone. K4\u20133rd grade: send exact cash in labeled ziploc bag with teacher at drop-off.", tags:["Event","Lunch","\ud83d\udcb5 Cash Needed"] },
+  { id:16, category:"\ud83d\udcb0 Tuition & Enrollment", subject:"\u26a0\ufe0f Tuition Payment Plan \u2014 ACTION NEEDED", from:"Ashlee & Gail", date:"Mar 6, 2026", deadline:"2026-03-13", urgent:true, body:"FACTS sent an email to set up your 2026-2027 tuition payment plan. You have ONE WEEK from March 6 to complete this \u2014 or your student\u2019s enrollment spot may be released. No tuition is due until August.", tags:["Tuition","2026-2027","\u26a0\ufe0f Deadline"] },
+  { id:17, category:"\ud83d\udcb0 Tuition & Enrollment", subject:"Update on Tuition Bills for 2026-2027", from:"Ashlee & Gail", date:"Feb 28, 2026", deadline:null, urgent:false, body:"Enrollment review wrapping up. Tuition bills being created. Email to set up payment plan coming in the next week or two.", tags:["Tuition","2026-2027"] },
+  { id:18, category:"\ud83d\udcb0 Tuition & Enrollment", subject:"2026-2027 Enrollment Information", from:"Ashlee & Gail", date:"Jan 19, 2026", deadline:"2026-01-27", urgent:false, past:true, body:"Enrollment opened Jan 20. Reduced registration fee ($80 vs $100) if enrolled by Jan 27. 8th graders wanting HS courses use the HS form. Classes expected to fill quickly. All done through FACTS.", tags:["Enrollment","2026-2027","Past"] },
+  { id:19, category:"\ud83d\udccb School Policies", subject:"Sick Policy Reminder", from:"Excelsior", date:"Jan 13, 2026", deadline:null, urgent:false, body:"Students must be symptom-free for 48 hours before returning. If anyone in the household has a stomach bug, keep ALL students home until the entire household has been 48 hours symptom-free.", tags:["Policy","Health"] },
+  { id:20, category:"\ud83d\udccb School Policies", subject:"First Semester Progress Reports", from:"Excelsior", date:"Dec 14, 2025", deadline:"2026-01-11", urgent:false, past:true, body:"Progress reports available Dec 15 in FACTS portal. K4\u20133rd emailed separately. 4th\u20138th and HS: go to FACTS portal > Grades > Mid-Term Progress Report. Report link expired Jan 11, 2026.", tags:["Grades","Progress Report","Past"] },
+  { id:21, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Columbia Fireflies Reading Program 2026", from:"Nichole Coffey", date:"Mar 3, 2026", deadline:"2026-04-01", urgent:false, body:"Spring reading program with the Columbia Fireflies baseball team! Track your student\u2019s reading from March 3 to April 1 using the attached reading log. Students who complete the log earn a free ticket + free hot dog and soda at the Fireflies game. Excelsior will attend the Thursday, April 9th game \u2014 open to ALL ages. Email Lorin Fairweather (lorinfairweather@gmail.com) with questions. Watch for a surprise visit from Mason the Firefly mascot!", tags:["\u26be Reading Program","All Ages","April 9 Game"], attachment:"Fireflies Reading Program 2026.pdf" },
+  { id:22, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 3/24", from:"Tricia Heen", date:"Mar 10, 2026", deadline:"2026-03-24", urgent:false, body:"Homework is up in the portal. Please let me know if you have any questions. Enjoy your break!", tags:["Homework","Grade 8","After Break"] },
+  { id:23, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Spring Break \u2014 No Classes 3/16\u20133/20", from:"Nichole Coffey", date:"Mar 10, 2026", deadline:"2026-03-16", urgent:false, body:"Spring Break is next week, March 16\u201320. There will be NO CLASSES. Classes resume on Tuesday, March 24.", tags:["Spring Break","No Classes","3/16\u20133/20"] },
+  { id:24, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"E! Field Day T-Shirts 2026", from:"Excelsior", date:"Mar 11, 2026", deadline:"2026-03-25", urgent:false, body:"Field Day T-shirts available for purchase through Zeffy \u2014 order by March 25. Shirts distributed at school (not shipped). Field Day: May 6 (Wednesday PE) & May 7 (Thursday PE). Optional, but a fun way to show team spirit!", tags:["Field Day","Optional","Order by Mar 25"], link:"https://www.zeffy.com/en-US/ticketing/e-field-day-t-shirts--2026" },
+  { id:25, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 Final Ticket Reminder!", from:"Excelsior", date:"Mar 11, 2026", deadline:"2026-03-27", urgent:false, body:"Jungle Book KIDS performs March 27th at 6:00pm at New Heights Church. Limited tickets remain \u2014 expected to sell out quickly. Tickets are $5 at zeffy.com \u2014 no tickets at the door. E-ticket required for entry.", tags:["Drama","Jungle Book Kids","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/jungle-book-kids" },
+  { id:26, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Parent Assessment for History Comes Alive Project", from:"Blaire Blagg", date:"Mar 11, 2026", deadline:"2026-03-16", urgent:false, body:"Please complete the Parent Evaluation for your student\u2019s History Comes Alive Project by Monday, March 16. Mrs. Blagg is grading projects and needs parent scores to finalize grades. Great work to all students!", tags:["History","Parent Evaluation","Due Mar 16"] },
+  { id:27, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 3/26", from:"Tricia Heen", date:"Mar 12, 2026", deadline:"2026-03-26", urgent:false, body:"Assignments are in the portal. Enjoy your break! \u2014 Mrs. Heen, 8th Grade Instructor", tags:["Homework","Grade 8","After Break"] },
+  { id:28, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"End of Year Book Sale \u2014 May 19", from:"Excelsior", date:"Mar 12, 2026", deadline:"2026-05-19", urgent:false, body:"Annual book sale on Tuesday, May 19 at New Heights Church cafeteria, 9am\u20131pm. Educational items and curriculum welcome. Sign up to sell (limited to first 20 spots) via Google Form \u2014 no sign-up needed to browse and buy. Spring break is a great time to sort through items! Questions? Contact Heather Hook at seaturtlebaby@gmail.com", tags:["Book Sale","School Event","May 19"] },
+  { id:29, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 6pm SOLD OUT, 7:15pm Show Possible", from:"Klaire Raines", date:"Mar 13, 2026", deadline:null, urgent:false, body:"The 6:00 showing of Jungle Book KIDS is sold out! Due to continued interest, a second 7:15pm performance is being considered \u2014 students would finish around 7:45pm. If no conflicts, ticket sales for the 7:15 show may open soon. Note: you\u2019ll need separate tickets if staying for both shows (fire code occupancy limits).", tags:["Drama","Jungle Book Kids","Second Show"] },
+  { id:30, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"New Performance Added \u2014 Jungle Book Kids 7:15pm Show", from:"Excelsior", date:"Mar 14, 2026", deadline:"2026-03-27", urgent:false, body:"The 7:15pm performance of Jungle Book KIDS is confirmed and tickets are now on sale! Tickets are $5 each via Zeffy \u2014 no tickets at the door. E-ticket required for entry. If you already have 6:00pm tickets and want to stay for the 7:15 show, you\u2019ll need separate tickets (fire code occupancy limits). Secure your seats before they sell out!", tags:["Drama","Jungle Book Kids","Tickets","7:15pm Show"], link:"https://www.zeffy.com/en-US/ticketing/jungle-book-kids" },
+  { id:31, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 Important Show Info & Call Time", from:"Klaire Raines", date:"Mar 15, 2026", deadline:"2026-03-27", urgent:false, body:"Important details for the March 27 performances (6:00 & 7:15pm): Students must be dropped off at 4:30pm for costume prep. Doors open at 5:45 & 7:00pm. No ticket, no entry \u2014 have your e-ticket ready to scan. $20 costume/set fee per student due by March 26 via Venmo (@Excelsior_Academy_SC) or exact cash/check to Mrs. Vickery. See costume requirements doc for your student\u2019s role.", tags:["Drama","Jungle Book Kids","Call Time 4:30pm","\ud83d\udcb5 $20 Fee Due Mar 26"], attachment:"TJB Kids Costume Requirements.pdf" },
+  { id:32, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"E! Field Day T-Shirt Purchase Confirmation", from:"Excelsior Academy (Zeffy)", date:"Mar 21, 2026", deadline:null, urgent:false, body:"\u2705 Purchase confirmed: 1 x YL T-Shirt + 1 x Adult Medium T-Shirt for $30. Pickup date TBD \u2014 Excelsior will send details next month. Payment via Apple Pay/Google Pay.", tags:["Field Day","\u2705 T-Shirts Purchased"] },
+  { id:33, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book KIDS \u2014 Last Chance Tickets (7:15pm)", from:"Excelsior", date:"Mar 23, 2026", deadline:"2026-03-27", urgent:true, body:"Jungle Book KIDS is this Friday night! Tickets still available for the 7:15pm performance. Tickets are $5 each via Zeffy \u2014 no tickets at the door. E-ticket required for entry. If you already have 6:00pm tickets and want to stay for 7:15pm, you\u2019ll need separate tickets (fire code occupancy limits). Once sold out, they\u2019re gone!", tags:["Drama","Jungle Book Kids","Tickets","7:15pm Show"], link:"https://www.zeffy.com/en-US/ticketing/jungle-book-kids" },
+  { id:34, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Jungle Book Kids \u2014 Performance Week Details!", from:"Klaire Raines", date:"Mar 24, 2026", deadline:"2026-03-27", urgent:true, body:"IT\u2019S SHOW WEEK! All students drop off at 4:30pm Friday March 27. Doors open 5:45pm (6:00 show) and 7:00pm (7:15 show). Runtime ~30 min. Students must arrive with makeup/hair done and costume items on. Hair: boys styled out of face; girls in braid, low bun, or low ponytail. Stage makeup: foundation, blush, bronzer, mascara (girls), chapstick (boys). Bring script, water bottle, deodorant in a small bag. $20 costume/set fee due by March 26 via Venmo (@Excelsior_Academy_SC) or exact cash/check to Mrs. Vickery. E-ticket required at door.", tags:["Drama","Jungle Book Kids","Call Time 4:30pm","\ud83d\udcb5 $20 Fee Due Mar 26"] },
+  { id:35, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 3/31", from:"Tricia Heen", date:"Mar 24, 2026", deadline:"2026-03-31", urgent:false, body:"All assignments are up in the portal. Please let me know if you have any questions. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8"] },
+  { id:36, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Muffins for Mom! \u2014 April 7", from:"Nichole Coffey", date:"Mar 24, 2026", deadline:"2026-04-01", urgent:false, body:"Muffins for Mom is Tuesday, April 7! Begins at 9:15am outside (weather permitting). Eat muffins, drink coffee, take pictures! At 9:45am go inside to the sanctuary for a devotional. Students return to class at 10am. Please RSVP by Wednesday, April 1st via the sign-up sheet.", tags:["Event","Muffins for Mom","RSVP by Apr 1"], attachment:"Muffins for Mom Flyer.pdf" },
+  { id:37, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Science Books Needed", from:"Tricia Heen", date:"Mar 25, 2026", deadline:"2026-03-26", urgent:true, body:"Please bring your science textbook to class tomorrow. You\u2019ll need it as a reference tool for an escape room. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Science","Grade 8","Bring Textbook"] },
+  { id:38, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Science Textbook Update \u2014 Disregard Previous Request", from:"Tricia Heen", date:"Mar 25, 2026", deadline:null, urgent:false, body:"Disregard the request to bring your textbook. The activity provides all needed information to complete the task. No need to bring your student workbook this week as we are starting a new Module. Do bring your completed test. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Science","Grade 8","Update"] },
+  { id:39, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 4/2", from:"Tricia Heen", date:"Mar 26, 2026", deadline:"2026-04-02", urgent:false, body:"All assignments are up in the portal. Let me know if you have any questions. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8"] },
+  { id:40, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Cottle Strawberry Farm Field Trip \u2014 April 17", from:"Nichole Coffey", date:"Mar 26, 2026", deadline:"2026-04-17", urgent:false, body:"Next field trip: Friday, April 17 at Cottle Strawberry Farm (Hopkins location)! Begins at 10am, stay as long as you like (closes 5pm). Includes FunPark entry and a bucket of strawberries per student. Cost: $18/student, $13/adult (no bucket for adults). Children 2 and under free (no bucket). 100 spots available. Bring your own lunch \u2014 eating areas provided. Sign up via Zeffy (set donation to $0).", tags:["Field Trip","All Ages","April 17"], link:"https://www.zeffy.com/en-US/ticketing/cottle-strawberry-farm-field-trip" },
+  { id:41, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Madagascar Jr. \u2014 Costume Requirements", from:"Klaire Raines", date:"Mar 27, 2026", deadline:"2026-04-09", urgent:false, body:"Costume requirements for Madagascar Jr. are out! Find your student\u2019s name in the attached chart and prepare all required clothing items (no large logos/writing). $50 costume/set fee due by April 9 via Venmo (@Excelsior_Academy_SC) or exact cash/check to Mrs. Vickery. Yearbook pictures in costume on April 9 \u2014 bring all items that day! Girls need hair done in requested style. Bring items to every dress rehearsal (4/9, 4/16, 4/21, 4/23 and shows). Keep everything in a \u201cdrama bag\u201d with extra deodorant. Stage makeup not needed until 4/23.", tags:["Drama","Madagascar Jr.","Costumes","\ud83d\udcb5 $50 Fee Due Apr 9"], attachment:"Madagascar Jr. Costume Requirements.pdf" },
+  { id:42, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Excelsior Spring Formal", from:"Tricia Heen", date:"Mar 30, 2026", deadline:null, urgent:false, body:"Details for the Excelsior Spring Formal are out! Purchase tickets via Zeffy. See the attached flyer for full event details including date, time, dress code, and more. Contact Mrs. Heen with questions.", tags:["Event","Spring Formal","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/excelsior-spring-formal", attachment:"Excelsior Prom Info.docx" },
+  { id:43, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Guess How Many Jelly Beans!", from:"Excelsior", date:"Mar 30, 2026", deadline:null, urgent:false, body:"It\u2019s jelly bean guessing time! \ud83c\udf89 Since Easter is right around the corner, there\u2019s a jar of colorful jelly beans in the front lobby. Students can grab a slip of paper at the guessing table, write down their guess, and fill out all their information. The closest guess wins a yummy treat! Good luck!", tags:["Event","Easter","Fun Activity"] },
+  { id:44, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"First Tuesday Snacks \u2014 April 7", from:"Tricia Heen", date:"Mar 31, 2026", deadline:"2026-04-07", urgent:false, body:"Next week is the first Tuesday of the month, so please bring a snack to share with the class if you\u2019d like. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Snack Day","Grade 8"] },
+  { id:45, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 4/9", from:"Tricia Heen", date:"Mar 31, 2026", deadline:"2026-04-09", urgent:false, body:"Assignments are up in the portal. Please make sure you have ordered your copy of The Hobbit study guide. \u2014 Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8"] },
+  { id:46, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"IMPORTANT: Drop Off Time Change \u2014 Tuesday, April 7", from:"Nichole Coffey", date:"Mar 31, 2026", deadline:"2026-04-07", urgent:true, body:"Muffins for Mom is on Tuesday, April 7 at 9:15 AM. If you are NOT participating in Muffins for Mom, please do not drop off your child until 10 AM so all staff moms can participate. At 10am, students go to the class they would be in BEFORE chapel. There will be no chapel that day.", tags:["Event","Muffins for Mom","\u26a0\ufe0f Late Drop Off"] },
+  { id:47, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Yearbook 2025\u20132026 \u2014 Order & Personal Pages", from:"Excelsior", date:"Mar 31, 2026", deadline:"2026-04-12", urgent:false, body:"Yearbook is being finalized! About 2 weeks left to order and create personal pages. Every child gets 2 free personal pages \u2014 additional pages in sets of 2 for $1. Personal pages must be completed by April 12th. Purchase anytime via TreeRing app or treering.com/validate with school code 1016588451503447. Photos needed from Neon Day and field trips \u2014 text to Natalie Epperson at 601-201-9202. Questions: Nepps08@gmail.com", tags:["Yearbook","Order by Apr 12"] },
+  { id:48, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"The Hobbit Study Guide \u2014 Purchase or Copy Fee", from:"Tricia Heen", date:"Apr 1, 2026", deadline:null, urgent:false, body:"You may purchase The Hobbit study guide (published by Progeny Press) for your student, or pay a $10 copy fee and Mrs. Heen will provide the material needed. Email Mrs. Heen at tricia.heen@excelsioracademy.org if you\u2019d like to pay the fee.", tags:["Literature","Grade 8","The Hobbit"] },
+  { id:49, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Spring Formal \u2014 Ticket Purchase Confirmation", from:"Excelsior Academy (Zeffy)", date:"Apr 1, 2026", deadline:null, urgent:false, body:"\u2705 1 x General Admission purchased for $65. A parental consent form will be sent that must be signed and returned \u2014 students will NOT be allowed onto the boat without it. Ladies must submit a picture of their dress to excelsioracademyedu@gmail.com for approval.", tags:["Event","Spring Formal","\u2705 Ticket Purchased"] },
+  { id:50, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Madagascar Jr. \u2014 Tickets ON SALE!", from:"Excelsior", date:"Apr 2, 2026", deadline:"2026-04-24", urgent:false, body:"Tickets for Madagascar Jr. are now available! Shows at New Heights Church: April 24 at 6:00 PM, or April 25 at 1:00 PM or 5:00 PM. Purchase at zeffy.com \u2014 no tickets at the door. Each ticket is valid only for the specific show purchased. E-ticket required for entry. Doors open 30 minutes before showtime. Set Zeffy donation to $0 during checkout.", tags:["Drama","Madagascar Jr.","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/madagascar-a-musical-adventure-jr" },
+  { id:51, category:"\ud83c\udfe9\ufe0f School-Wide \u2014 Excelsior", subject:"Columbia Fireflies \u2014 Game Ticket Link", from:"Excelsior", date:"Apr 2, 2026", deadline:"2026-04-09", urgent:true, body:"It\u2019s almost game time! If you had trouble getting tickets for the Fireflies reading program game, use this updated link to get your tickets now.", tags:["\u26be Reading Program","Fireflies Game","April 9"], link:"https://www.gofevo.com/group/SpringReading" },
+  { id:52, category:"\ud83d\udcda Grade 8 \u2014 Mrs. Heen", subject:"Homework Due 4/9 \u2014 Research Paper Reminder", from:"Tricia Heen", date:"Apr 2, 2026", deadline:"2026-04-09", urgent:false, body:"Assignments are up in the portal. Your research paper is due next week. If you have any questions about citations, visit www.grammarly.com. \u2014 Mrs. Heen", tags:["Homework","Grade 8","Research Paper"] },
+  { id:53, category:"\ud83c\udfad Drama \u2014 Klaire Raines", subject:"Madagascar Jr. \u2014 Yearbook Pictures Tuesday Apr 7", from:"Klaire Raines", date:"Apr 3, 2026", deadline:"2026-04-07", urgent:true, body:"Yearbook pictures in costume during rehearsal this Tuesday, April 7th. Bring all required clothing items, shoes, and deodorant. Ladies: have hair done in the requested style. Guys: make sure hair is fixed. Reference the previous \u2018Madagascar Jr. Costume Requirements\u2019 email for all details. Happy Easter!", tags:["Drama","Madagascar Jr.","Yearbook Pictures"] },
+];
+
+let activeCategory = "ALL";
+let showPast = false;
+let showCompleted = false;
+let expandedId = null;
+let completedIds = new Set(/* COMPLETED_IDS_START */[1,2,3,4,5,6,7,8,9,10,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,42,46,49]/* COMPLETED_IDS_END */);
+let dirty = false;
+
+function daysUntil(dateStr) {
+  if (!dateStr) return null;
+  return Math.ceil((new Date(dateStr) - TODAY) / 86400000);
+}
+
+function urgencySort(a, b) {
+  const aDone = completedIds.has(a.id);
+  const bDone = completedIds.has(b.id);
+  // Completed items always sort to bottom
+  if (aDone && !bDone) return 1;
+  if (!aDone && bDone) return -1;
+  if (a.urgent && !b.urgent) return -1;
+  if (!a.urgent && b.urgent) return 1;
+  const da = a.deadline ? daysUntil(a.deadline) : 9999;
+  const db = b.deadline ? daysUntil(b.deadline) : 9999;
+  return da - db;
+}
+
+function togglePast() {
+  showPast = !showPast;
+  const btn = document.getElementById("togglePast");
+  btn.innerHTML = showPast ? "&#9660; Hide Past" : "&#9654; Show Past";
+  btn.className = "toggle-btn" + (showPast ? " on" : "");
+  render();
+}
+
+function toggleCompleted() {
+  showCompleted = !showCompleted;
+  const btn = document.getElementById("toggleCompleted");
+  btn.innerHTML = showCompleted ? "&#10003; Hide Done" : "&#10003; Show Done";
+  btn.className = "toggle-btn" + (showCompleted ? " on-green" : "");
+  render();
+}
+
+function toggleComplete(id, e) {
+  e.stopPropagation();
+  if (completedIds.has(id)) {
+    completedIds.delete(id);
+  } else {
+    completedIds.add(id);
+    // Collapse the card if it was open
+    if (expandedId === id) expandedId = null;
+  }
+  dirty = true;
+  render();
+}
+
+function saveUpdates() {
+  if (completedIds.size === 0) return;
+  const ids = Array.from(completedIds).sort((a, b) => a - b).join(',');
+  const subject = 'Excelsior Dashboard \u2014 Marked As Complete';
+  const body =
+    'COMPLETED_IDS: ' + ids + '\n\n' +
+    'This email is used to automatically restore your dashboard completion state on the next nightly update. ' +
+    'Please do not modify the line above.\n\n' +
+    'Items marked as done: ' + ids;
+  window.open(
+    'mailto:homeclaw02@gmail.com?subject=' +
+    encodeURIComponent(subject) + '&body=' + encodeURIComponent(body)
+  );
+  dirty = false;
+  render();
+  showToast('\u2709\ufe0f Email opened \u2014 send it to save your progress!');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('saveToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  renderTabs();
+  render();
+}
+
+function toggleCard(id) {
+  expandedId = expandedId === id ? null : id;
+  render();
+}
+
+function renderTabs() {
+  const cats = ["ALL", ...CAT_ORDER];
+  document.getElementById("filterTabs").innerHTML = cats.map(cat => {
+    const isActive = activeCategory === cat;
+    const c = CAT_COLORS[cat] || {};
+    const style = isActive
+      ? `border-color:${c.border||"#1a3250"};background:${c.pill||"#dbeafe"};color:${c.accent||"#1a3250"};font-weight:700;`
+      : "";
+    return `<button class="tab-btn${isActive?" active":""}" style="${style}" onclick="setCategory('${cat.replace(/'/g,"\\'")}')">
+      ${cat === "ALL" ? "All" : cat}
+    </button>`;
+  }).join("");
+}
+
+function render() {
+  const filtered = EMAILS
+    .filter(e => activeCategory === "ALL" || e.category === activeCategory)
+    .filter(e => showPast || !e.past)
+    .filter(e => showCompleted || !completedIds.has(e.id))
+    .sort(urgencySort);
+
+  const urgentCount = EMAILS.filter(e => e.urgent && !e.past && !completedIds.has(e.id)).length;
+  const weekCount = EMAILS.filter(e => {
+    if (!e.deadline || e.past || completedIds.has(e.id)) return false;
+    const d = daysUntil(e.deadline);
+    return d !== null && d >= 0 && d <= 7;
+  }).length;
+  document.getElementById("urgentCount").textContent = urgentCount;
+  document.getElementById("weekCount").textContent = weekCount;
+  document.getElementById("saveBtn").style.display = dirty ? "inline-flex" : "none";
+
+  if (filtered.length === 0) {
+    document.getElementById("emailList").innerHTML = '<div class="empty">No emails in this category.</div>';
+    return;
+  }
+
+  document.getElementById("emailList").innerHTML = filtered.map(email => {
+    const c = CAT_COLORS[email.category] || CAT_COLORS["\ud83d\udccb School Policies"];
+    const isOpen = expandedId === email.id;
+    const isDone = completedIds.has(email.id);
+    const days = daysUntil(email.deadline);
+
+    let badge = "";
+    if (isDone) {
+      badge = `<span class="badge done-badge">&#10003; Done</span>`;
+    } else if (email.deadline) {
+      if (email.past || days < 0) badge = `<span class="badge past-badge">Past</span>`;
+      else if (days === 0)        badge = `<span class="badge today">TODAY</span>`;
+      else if (days <= 3)         badge = `<span class="badge urgent-badge">In ${days}d \u26a1</span>`;
+      else                        badge = `<span class="badge soon">In ${days}d</span>`;
+    }
+
+    const tags = email.tags.map(t =>
+      `<span class="tag" style="background:${c.pill};color:${c.accent};border-color:${c.border}">${t}</span>`
+    ).join("");
+
+    const urgentDot = (email.urgent && !email.past && !isDone)
+      ? `<div class="urgent-dot"></div>` : "";
+
+    const bodySection = isOpen ? `
+      <div class="card-body" style="border-top-color:${c.border};background:${c.bg}">
+        <p class="body-text">${email.body}</p>
+        ${email.attachment ? `<div class="attach-pill" style="border-color:${c.border}"><span>\ud83d\udcce</span><span style="color:${c.accent}">${email.attachment}</span></div>` : ""}
+        ${email.link ? `<a class="card-link" href="${email.link}" target="_blank" rel="noreferrer" onclick="event.stopPropagation()">\ud83d\udd17 ${email.link}</a>` : ""}
+      </div>` : "";
+
+    return `
+      <div class="card${isOpen?" open":""}${email.past?" past":""}${isDone?" done":""}"
+        style="border-left-color:${c.border};${isOpen&&!isDone?`background:${c.bg};border-color:${c.border};`:""}"
+        onclick="toggleCard(${email.id})">
+        <div class="card-top">
+          <div class="card-left">
+            ${urgentDot}
+            <div style="min-width:0">
+              <div class="card-subject">${email.subject}</div>
+              <div class="card-meta">
+                <span class="cat-label" style="color:${c.accent}">${email.category}</span>
+                <span class="meta-dot">\u00b7</span>
+                <span class="from-label">${email.from}</span>
+                <span class="meta-dot">\u00b7</span>
+                <span class="date-label">${email.date}</span>
+              </div>
+              <div class="tags">${tags}</div>
+            </div>
+          </div>
+          <div class="card-right">
+            <button class="complete-btn${isDone?" done":""}"
+              onclick="toggleComplete(${email.id}, event)"
+              title="${isDone ? 'Mark as not done' : 'Mark as done'}">&#10003;</button>
+            ${badge}
+            <span class="chevron">${isOpen?"\u25b2":"\u25bc"}</span>
+          </div>
+        </div>
+        ${bodySection}
+      </div>`;
+  }).join("");
+}
+
+renderTabs();
+render();
+</script>
+</body>
+</html>
