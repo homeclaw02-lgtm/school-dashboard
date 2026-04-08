@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 56 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 59 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-07");
+const TODAY = new Date("2026-04-08");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -252,13 +252,16 @@ const EMAILS = [
   { id:54, category:"🏩️ School-Wide — Excelsior", subject:"REMINDER: Drop Off at 10am Tomorrow (Muffins for Mom)", from:"Ashlee & Gail", date:"Apr 6, 2026", deadline:"2026-04-07", urgent:true, body:"Reminder: Tomorrow is Muffins for Moms! If your K4–8th grade student is NOT participating, drop off will be at 10am — not 9:25am. No chapel and no teachers in classrooms until 10am. At 10am, students go to the class they would be in BEFORE chapel. All early high school courses, STEM classes, 8:30am classes, and study halls still meet at their regular time.", tags:["Event","Muffins for Mom","⚠️ Late Drop Off"] },
   { id:55, category:"📚 Grade 8 — Mrs. Heen", subject:"Grade 8 Reminders — Snack Day & Hobbit Study Guide", from:"Tricia Heen", date:"Apr 6, 2026", deadline:"2026-04-07", urgent:true, body:"Tomorrow is bring-a-snack day (completely optional). Also, parents please confirm if you want your student to receive copies of The Hobbit study guide — Mrs. Heen needs to make copies this week. If you choose copies, have your student bring $10 (copy fee) to class tomorrow.", tags:["Grade 8","Snack Day","The Hobbit","💵 $10 Copy Fee"] },
   { id:56, category:"🏩️ School-Wide — Excelsior", subject:"Mission Project Fundraiser — Judah Traylor", from:"Ashlee Vickery", date:"Apr 6, 2026", deadline:null, urgent:false, body:"Excelsior is starting a 2nd semester missions project fundraiser for Judah Traylor, a former Excelsior student currently fighting a rare tumor (poorly differentiated chordoma). Goal tracker in the lobby starting tomorrow — for every $10 donated, fill in a space. Goal: $1,000. Excelsior will match whatever is donated. If every family donates just $10, we can easily surpass the goal! Please lift Judah up in prayer for healing.", tags:["Fundraiser","Mission Project","Community"] },
+  { id:57, category:"🏩️ School-Wide — Excelsior", subject:"Mission Project — Cash or Check Only", from:"Nichole Coffey", date:"Apr 7, 2026", deadline:null, urgent:false, body:"For the mission project for Judah Traylor, Excelsior will only accept cash or check made out to Excelsior Academy. No other payment methods accepted.", tags:["Fundraiser","Mission Project","💵 Cash/Check Only"] },
+  { id:58, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 4/14 — The Hobbit Begins", from:"Tricia Heen", date:"Apr 7, 2026", deadline:"2026-04-14", urgent:false, body:"Assignments are in the portal. Shakespeare final is the group activity completed in class. Begin reading The Hobbit next week — read the study guide activities carefully or print out the instructions. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8","The Hobbit"] },
+  { id:59, category:"🎭 Drama — Klaire Raines", subject:"Madagascar Jr. — Ticket Reminder & Important Rules", from:"Excelsior", date:"Apr 7, 2026", deadline:"2026-04-24", urgent:false, body:"Friendly reminder that Madagascar Jr. tickets are available! Shows: April 24 at 6:00 PM, April 25 at 1:00 PM or 5:00 PM at New Heights Church. Each ticket is valid only for the specific show purchased — no switching allowed. Tickets must be purchased under your name. E-ticket required for admittance. Doors open 30 min before showtime. No tickets at the door. Set Zeffy donation to $0 during checkout.", tags:["Drama","Madagascar Jr.","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/madagascar-a-musical-adventure-jr" },
 ];
 
 let activeCategory = "ALL";
 let showPast = false;
 let showCompleted = false;
 let expandedId = null;
-let completedIds = new Set(/* COMPLETED_IDS_START */[1,2,3,4,5,6,7,8,9,10,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,42,46,49]/* COMPLETED_IDS_END */);
+let completedIds = new Set(/* COMPLETED_IDS_START */[1,2,3,4,5,6,7,8,9,10,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,48,49,50,51,53,54,55,56]/* COMPLETED_IDS_END */);
 let dirty = false;
 
 function daysUntil(dateStr) {
