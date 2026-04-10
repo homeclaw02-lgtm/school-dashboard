@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 60 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 63 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-09");
+const TODAY = new Date("2026-04-10");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -256,6 +256,9 @@ const EMAILS = [
   { id:58, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 4/14 — The Hobbit Begins", from:"Tricia Heen", date:"Apr 7, 2026", deadline:"2026-04-14", urgent:false, body:"Assignments are in the portal. Shakespeare final is the group activity completed in class. Begin reading The Hobbit next week — read the study guide activities carefully or print out the instructions. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8","The Hobbit"] },
   { id:59, category:"🎭 Drama — Klaire Raines", subject:"Madagascar Jr. — Ticket Reminder & Important Rules", from:"Excelsior", date:"Apr 7, 2026", deadline:"2026-04-24", urgent:false, body:"Friendly reminder that Madagascar Jr. tickets are available! Shows: April 24 at 6:00 PM, April 25 at 1:00 PM or 5:00 PM at New Heights Church. Each ticket is valid only for the specific show purchased — no switching allowed. Tickets must be purchased under your name. E-ticket required for admittance. Doors open 30 min before showtime. No tickets at the door. Set Zeffy donation to $0 during checkout.", tags:["Drama","Madagascar Jr.","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/madagascar-a-musical-adventure-jr" },
   { id:60, category:"🏫 School-Wide — Excelsior", subject:"Medieval Day — April 28", from:"Blaire Blagg", date:"Apr 8, 2026", deadline:"2026-04-28", urgent:false, body:"In celebration of student learning this year, there will be a 'Medieval Day' during normal class time on Tuesday, April 28th for 4th–7th graders. The plan includes Medieval-era snacks, period-appropriate games, and fun activities. A sign-up sheet is available if you'd like to contribute. — Blaire Blagg, 4–7th History, Excelsior Academy", tags:["History","4th–7th Grade","April 28"] },
+  { id:61, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 4/16", from:"Tricia Heen", date:"Apr 9, 2026", deadline:"2026-04-16", urgent:false, body:"Assignments are in the portal. Please let me know if you have any questions. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8"] },
+  { id:62, category:"🏫 School-Wide — Excelsior", subject:"Mark Your Calendars — End of Year Dates", from:"Excelsior", date:"Apr 9, 2026", deadline:null, urgent:false, body:"Key dates for the rest of the year: April 24 at 6:00 PM — Advanced Drama Madagascar Jr. April 25 at 1:00 PM & 5:00 PM — Madagascar Jr. April 28 at 2:00 PM — K5 Graduation. April 29 & 30 at 9:00 AM — Field Day. May 2 — High School Formal. May 5 at 2:00 PM — End of Year Music Performance (last day of Tuesday classes). May 6 at 11:00 AM — End of Year Music Performance (last day of Wednesday classes). May 7 — Last day of Thursday classes. May 8 at 8:30 AM — Iowa Testing. May 9 at 10:00 AM — Family Picnic (sign-up sheet coming soon).", tags:["End of Year","Calendar","Field Day","Madagascar Jr."] },
+  { id:63, category:"🏫 School-Wide — Excelsior", subject:"Yearbook — Last Day for Personal Pages This Sunday", from:"Excelsior", date:"Apr 9, 2026", deadline:"2026-04-12", urgent:true, body:"This Sunday is the last day to create your personal pages in the yearbook! Be sure to hit 'pages ready' when done. Orders need to be in this week for free shipping — books will arrive before school ends and be passed out at school. You can always order later (even past years) but shipping will be charged and sent to your home. Questions: contact Natalie Epperson at nepps08@gmail.com.", tags:["Yearbook","Personal Pages","⚠️ Order This Week"] },
 ];
 
 let activeCategory = "ALL";
