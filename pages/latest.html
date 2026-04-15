@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 63 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 69 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-13");
+const TODAY = new Date("2026-04-15");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -259,6 +259,12 @@ const EMAILS = [
   { id:61, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 4/16", from:"Tricia Heen", date:"Apr 9, 2026", deadline:"2026-04-16", urgent:false, body:"Assignments are in the portal. Please let me know if you have any questions. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8"] },
   { id:62, category:"🏫 School-Wide — Excelsior", subject:"Mark Your Calendars — End of Year Dates", from:"Excelsior", date:"Apr 9, 2026", deadline:null, urgent:false, body:"Key dates for the rest of the year: April 24 at 6:00 PM — Advanced Drama Madagascar Jr. April 25 at 1:00 PM & 5:00 PM — Madagascar Jr. April 28 at 2:00 PM — K5 Graduation. April 29 & 30 at 9:00 AM — Field Day. May 2 — High School Formal. May 5 at 2:00 PM — End of Year Music Performance (last day of Tuesday classes). May 6 at 11:00 AM — End of Year Music Performance (last day of Wednesday classes). May 7 — Last day of Thursday classes. May 8 at 8:30 AM — Iowa Testing. May 9 at 10:00 AM — Family Picnic (sign-up sheet coming soon).", tags:["End of Year","Calendar","Field Day","Madagascar Jr."] },
   { id:63, category:"🏫 School-Wide — Excelsior", subject:"Yearbook — Last Day for Personal Pages This Sunday", from:"Excelsior", date:"Apr 9, 2026", deadline:"2026-04-12", urgent:true, body:"This Sunday is the last day to create your personal pages in the yearbook! Be sure to hit 'pages ready' when done. Orders need to be in this week for free shipping — books will arrive before school ends and be passed out at school. You can always order later (even past years) but shipping will be charged and sent to your home. Questions: contact Natalie Epperson at nepps08@gmail.com.", tags:["Yearbook","Personal Pages","⚠️ Order This Week"] },
+  { id:64, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 4/21 — Food Truck Project", from:"Tricia Heen", date:"Apr 14, 2026", deadline:"2026-04-21", urgent:false, body:"Assignments are in the portal. Food truck worksheets attached — you DO NOT need to print them out, but may want to download for reference. Research equipment/supply costs and ingredient prices for your menu items. Write findings on paper or in your notebook and be prepared to share with your group next week. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8","Food Truck Project"] },
+  { id:65, category:"🎭 Drama — Klaire Raines", subject:"Grab Your Madagascar Tickets Now!", from:"Excelsior", date:"Apr 14, 2026", deadline:"2026-04-24", urgent:false, body:"Madagascar Jr. is next weekend! Shows at New Heights Church: April 24 at 6:00 PM, April 25 at 1:00 PM or 5:00 PM. Each ticket valid only for the specific show purchased — no switching allowed. E-ticket required for admittance. Doors open 30 min before showtime. No tickets at the door. Set Zeffy donation to $0 during checkout.", tags:["Drama","Madagascar Jr.","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/madagascar-a-musical-adventure-jr" },
+  { id:66, category:"🏫 School-Wide — Excelsior", subject:"E! Spring Formal on 5/2 — Grab Your Tickets!", from:"Excelsior", date:"Apr 14, 2026", deadline:"2026-05-02", urgent:false, body:"Set sail aboard the Spirit of Lake Murray on May 2nd! Boarding at 7:30 PM, cruise 8:00–10:00 PM, then dockside 10:00–11:00 PM with a waffle bar. $65/ticket — limited spots. Parental consent form required — students without it will NOT be allowed on the boat. Ladies must email a dress pic to excelsioracademyedu@gmail.com for approval.", tags:["Event","Spring Formal","Tickets"], link:"https://www.zeffy.com/en-US/ticketing/excelsior-spring-formal" },
+  { id:67, category:"🏫 School-Wide — Excelsior", subject:"End of Year Reminders — Book Sale May 19", from:"Ashlee Vickery", date:"Apr 14, 2026", deadline:"2026-05-19", urgent:false, body:"Book sale is May 19th, 9am–1pm. 6 booth slots still available — contact Heather Hook at seaturtlebaby@gmail.com to sign up for a booth.", tags:["Book Sale","School Event","May 19"] },
+  { id:68, category:"🏫 School-Wide — Excelsior", subject:"REMINDER: Cottle Strawberry Farm Field Trip — This Friday!", from:"Nichole Coffey", date:"Apr 14, 2026", deadline:"2026-04-17", urgent:true, body:"Field trip is THIS Friday, April 17 at Cottle Strawberry Farm (Hopkins location)! Not too late to sign up. Begins at 10am, stay as long as you like (closes 5pm). Includes FunPark entry and a bucket of strawberries per student. $18/student, $13/adult (no bucket for adults). Children 2 and under free. 100 spots available. Bring your own lunch.", tags:["Field Trip","All Ages","⚠️ This Friday"], link:"https://www.zeffy.com/en-US/ticketing/cottle-strawberry-farm-field-trip" },
+  { id:69, category:"🏫 School-Wide — Excelsior", subject:"Yearbook — Personal Pages Toggle Update", from:"Excelsior (Natalie Epperson)", date:"Apr 14, 2026", deadline:"2026-04-19", urgent:false, body:"Website changed for yearbook personal pages. When creating your personal page, there is a toggle underneath that says 'print custom pages' — make sure it is marked 'yes' by Sunday at midnight.", tags:["Yearbook","Personal Pages","Due This Sunday"] },
 ];
 
 let activeCategory = "ALL";
