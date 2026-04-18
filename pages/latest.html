@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 69 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 72 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-17");
+const TODAY = new Date("2026-04-18");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -265,6 +265,9 @@ const EMAILS = [
   { id:67, category:"🏫 School-Wide — Excelsior", subject:"End of Year Reminders — Book Sale May 19", from:"Ashlee Vickery", date:"Apr 14, 2026", deadline:"2026-05-19", urgent:false, body:"Book sale is May 19th, 9am–1pm. 6 booth slots still available — contact Heather Hook at seaturtlebaby@gmail.com to sign up for a booth.", tags:["Book Sale","School Event","May 19"] },
   { id:68, category:"🏫 School-Wide — Excelsior", subject:"REMINDER: Cottle Strawberry Farm Field Trip — This Friday!", from:"Nichole Coffey", date:"Apr 14, 2026", deadline:"2026-04-17", urgent:true, body:"Field trip is THIS Friday, April 17 at Cottle Strawberry Farm (Hopkins location)! Not too late to sign up. Begins at 10am, stay as long as you like (closes 5pm). Includes FunPark entry and a bucket of strawberries per student. $18/student, $13/adult (no bucket for adults). Children 2 and under free. 100 spots available. Bring your own lunch.", tags:["Field Trip","All Ages","⚠️ This Friday"], link:"https://www.zeffy.com/en-US/ticketing/cottle-strawberry-farm-field-trip" },
   { id:69, category:"🏫 School-Wide — Excelsior", subject:"Yearbook — Personal Pages Toggle Update", from:"Excelsior (Natalie Epperson)", date:"Apr 14, 2026", deadline:"2026-04-19", urgent:false, body:"Website changed for yearbook personal pages. When creating your personal page, there is a toggle underneath that says 'print custom pages' — make sure it is marked 'yes' by Sunday at midnight.", tags:["Yearbook","Personal Pages","Due This Sunday"] },
+  { id:70, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Update — Bible Final Exam Prep", from:"Tricia Heen", date:"Apr 16, 2026", deadline:null, urgent:false, body:"Assignments are in the portal. Mrs. Heen will send out an email this weekend listing any outstanding work that needs to be done — only 3 classes left! Bible test: your final Bible exam will be given on the last Thursday. You will need to know all of the books of the Bible in order. Look at YouTube for music videos covering all Bible books. Get started now so you will be ready!", tags:["Homework","Grade 8","Bible Exam","Final"] },
+  { id:71, category:"🏫 School-Wide — Excelsior", subject:"BJU Sale — Cola City Homeschool Expo", from:"Nichole Coffey", date:"Apr 16, 2026", deadline:"2026-06-26", urgent:false, body:"Cola City Homeschool Expo at Jamil Temple offers 20% off all BJU Press curriculum and materials (other than Testing Services and Logos Science kits). June 26, 10am–4pm at 206 Jamil Road, Columbia SC 29210.", tags:["BJU Sale","Curriculum","June 26"] },
+  { id:72, category:"🏫 School-Wide — Excelsior", subject:"Field Day Volunteers Needed — April 30", from:"Savannah Jordan", date:"Apr 17, 2026", deadline:"2026-04-30", urgent:false, body:"Field Day is Thursday, April 30th! (Note: originally scheduled for the last day of school, now moved up.) Looking for approximately 15 volunteers. Arrival: 8:45 AM at the school lobby to find Coach Jordan. You'll lead or supervise a specific activity as classes rotate to you every 15 minutes. Stations run 9:15am–12:00 PM, indoors and outdoors. Reply directly to the email ASAP — spots are first-come, first-served.", tags:["Field Day","Volunteers","April 30"] },
 ];
 
 let activeCategory = "ALL";
