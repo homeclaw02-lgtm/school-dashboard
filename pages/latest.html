@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 73 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 78 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-23");
+const TODAY = new Date("2026-04-27");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -269,6 +269,11 @@ const EMAILS = [
   { id:71, category:"🏫 School-Wide — Excelsior", subject:"BJU Sale — Cola City Homeschool Expo", from:"Nichole Coffey", date:"Apr 16, 2026", deadline:"2026-06-26", urgent:false, body:"Cola City Homeschool Expo at Jamil Temple offers 20% off all BJU Press curriculum and materials (other than Testing Services and Logos Science kits). June 26, 10am–4pm at 206 Jamil Road, Columbia SC 29210.", tags:["BJU Sale","Curriculum","June 26"] },
   { id:72, category:"🏫 School-Wide — Excelsior", subject:"Field Day Volunteers Needed — April 30", from:"Savannah Jordan", date:"Apr 17, 2026", deadline:"2026-04-30", urgent:false, body:"Field Day is Thursday, April 30th! (Note: originally scheduled for the last day of school, now moved up.) Looking for approximately 15 volunteers. Arrival: 8:45 AM at the school lobby to find Coach Jordan. You'll lead or supervise a specific activity as classes rotate to you every 15 minutes. Stations run 9:15am–12:00 PM, indoors and outdoors. Reply directly to the email ASAP — spots are first-come, first-served.", tags:["Field Day","Volunteers","April 30"] },
   { id:73, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 4/28", from:"Tricia Heen", date:"Apr 21, 2026", deadline:"2026-04-28", urgent:false, body:"Hello all! Next week's homework is on the portal. Let me know if you have any questions. — Mrs. Heen", tags:["Homework","Grade 8"] },
+  { id:74, category:"🏩️ School-Wide — Excelsior", subject:"FACTS Gradebook & End of the Year Reports", from:"Excelsior", date:"Apr 23, 2026", deadline:null, urgent:false, body:"End-of-year information regarding FACTS Gradebook and year-end reports. Check FACTS for the latest updates on grades and reports as the school year wraps up.", tags:["Grades","End of Year","FACTS"] },
+  { id:75, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 4/30", from:"Tricia Heen", date:"Apr 24, 2026", deadline:"2026-04-30", urgent:true, body:"Assignments are in the portal. Don’t forget that next Thursday is field day, so dress appropriately in sneakers and athletic wear. Please let me know if you have any questions. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8","Field Day Reminder"] },
+  { id:76, category:"📚 Grade 8 — Mrs. Heen", subject:"Missing Assignments — Check FACTS Gradebook", from:"Tricia Heen", date:"Apr 27, 2026", deadline:"2026-05-11", urgent:false, body:"Please check your student’s FACTS gradebook for any missing assignments. If you see a “zero” that means the assignment hasn’t been received. If a grade was missed and you have a copy of the graded assignment, send Mrs. Heen a photo so she can enter the grade. Students have the next two weeks to get caught up. Contact Mrs. Heen if you have questions or need assignments emailed. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Missing Work","Grade 8","⚠️ Action Needed"] },
+  { id:77, category:"🏩️ School-Wide — Excelsior", subject:"Ice Cream Truck at Field Day — Apr 29 & 30", from:"Savannah Jordan", date:"Apr 27, 2026", deadline:"2026-04-29", urgent:true, body:"There will be an ice cream truck at Field Day this Wednesday (April 29) and Thursday (April 30) during lunch starting at 12:00pm. Send money with your student if they’d like to purchase. Prices: Single scoop bowl $5, waffle cone $6. Double scoop bowl $7, waffle cone $8. Flavors: Raspberry Sorbet (dairy-free), Birthday Cake, Coffee, Oreo Cookie Dough, Caramel Cookie Dough Cheesecake, Vanilla, Chocolate, Cookies N Cream, Cookie Dough, Cotton Candy.", tags:["Field Day","Ice Cream","💵 Cash Needed"] },
+  { id:78, category:"🏩️ School-Wide — Excelsior", subject:"Art Show Winners Announced", from:"Sonia Neale", date:"Apr 27, 2026", deadline:null, urgent:false, body:"The art show winners have been announced! The list of winners is attached. Awards and artwork will be given back tomorrow. The list was also posted in resources. — Mrs. Neale", tags:["Art Show","Winners"] },
 ];
 
 let activeCategory = "ALL";
