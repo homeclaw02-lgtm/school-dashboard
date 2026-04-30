@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 79 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 83 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-29");
+const TODAY = new Date("2026-04-30");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -275,6 +275,10 @@ const EMAILS = [
   { id:77, category:"🏩️ School-Wide — Excelsior", subject:"Ice Cream Truck at Field Day — Apr 29 & 30", from:"Savannah Jordan", date:"Apr 27, 2026", deadline:"2026-04-29", urgent:true, body:"There will be an ice cream truck at Field Day this Wednesday (April 29) and Thursday (April 30) during lunch starting at 12:00pm. Send money with your student if they’d like to purchase. Prices: Single scoop bowl $5, waffle cone $6. Double scoop bowl $7, waffle cone $8. Flavors: Raspberry Sorbet (dairy-free), Birthday Cake, Coffee, Oreo Cookie Dough, Caramel Cookie Dough Cheesecake, Vanilla, Chocolate, Cookies N Cream, Cookie Dough, Cotton Candy.", tags:["Field Day","Ice Cream","💵 Cash Needed"] },
   { id:78, category:"🏩️ School-Wide — Excelsior", subject:"Art Show Winners Announced", from:"Sonia Neale", date:"Apr 27, 2026", deadline:null, urgent:false, body:"The art show winners have been announced! The list of winners is attached. Awards and artwork will be given back tomorrow. The list was also posted in resources. — Mrs. Neale", tags:["Art Show","Winners"] },
   { id:79, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 5/5 — Food Truck Fair & History Final Prep", from:"Tricia Heen", date:"Apr 28, 2026", deadline:"2026-05-05", urgent:false, body:"One week to go! Please study for your SAT lists and complete the history study questions to prepare for the history final next week. Parents, email Mrs. Heen directly for the answer key to the history study prep questions. FOOD TRUCK FAIR! Next week, your group will give a food truck presentation. Please bring a food item that represents your truck to share with the class. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8","Food Truck Project","History Final"] },
+  { id:80, category:"🏩️ School-Wide — Excelsior", subject:"Field Day Reminders — April 30", from:"Excelsior", date:"Apr 29, 2026", deadline:"2026-04-30", urgent:true, body:"Field Day is tomorrow! Outdoor activities planned (weather permitting). Students should bring/wear: weather-appropriate athletic wear, closed-toed athletic shoes, sunscreen applied before arrival, a towel and full change of clothes for the Foam Extravaganza, and a refillable water bottle. Schedule: 9:15 AM activities kick off, 11:45 AM activities conclude, 12:00 PM Ice Cream Truck arrives (send money with your student — K4–3rd put in a labeled ziploc bag), 2:00 PM dismissal as usual. — Ashlee & Gail, Excelsior Academy", tags:["Field Day","⚠️ Today","Ice Cream","💵 Cash Needed"] },
+  { id:81, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Correction", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"Please make the following correction/change to question #12 on the history test prep worksheet. It should read as follows: 12. What ruler of Bohemia was known for his kindness and generosity? — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Correction"] },
+  { id:82, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Correction — Part 2", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"OOPS! That should be question #10! Please make the following correction/change to question #10 on the history test prep worksheet. It should read as follows: 10. What ruler of Bohemia was known for his kindness and generosity? — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Correction"] },
+  { id:83, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Answer Key — Email Mrs. Heen", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"Parents, a reminder that if you want the answer key for the history prep questions, you must email Mrs. Heen directly. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Answer Key"] },
 ];
 
 let activeCategory = "ALL";
