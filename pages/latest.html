@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 83 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 84 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-04-30");
+const TODAY = new Date("2026-05-01");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -279,13 +279,14 @@ const EMAILS = [
   { id:81, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Correction", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"Please make the following correction/change to question #12 on the history test prep worksheet. It should read as follows: 12. What ruler of Bohemia was known for his kindness and generosity? — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Correction"] },
   { id:82, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Correction — Part 2", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"OOPS! That should be question #10! Please make the following correction/change to question #10 on the history test prep worksheet. It should read as follows: 10. What ruler of Bohemia was known for his kindness and generosity? — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Correction"] },
   { id:83, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Answer Key — Email Mrs. Heen", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"Parents, a reminder that if you want the answer key for the history prep questions, you must email Mrs. Heen directly. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Answer Key"] },
+  { id:84, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 5/7 — Final Bible Test & Spelling Bee", from:"Tricia Heen", date:"Apr 30, 2026", deadline:"2026-05-07", urgent:false, body:"One week to go! Be ready for your final Bible test and take the Ch. 17 grammar test. Next week we will have a Spelling Bee with prizes for 1st-3rd place. Turn in any outstanding work. After lunch we'll have games and a sweet treat! — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8","Bible Final","Spelling Bee","Last Week"] },
 ];
 
 let activeCategory = "ALL";
 let showPast = false;
 let showCompleted = false;
 let expandedId = null;
-let completedIds = new Set(/* COMPLETED_IDS_START */[1,2,3,4,5,6,7,8,9,10,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,71,72,73]/* COMPLETED_IDS_END */);
+let completedIds = new Set(/* COMPLETED_IDS_START */[1,2,3,4,5,6,7,8,9,10,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,71,72,73,75,77,78,79,80]/* COMPLETED_IDS_END */);
 let dirty = false;
 
 function daysUntil(dateStr) {
