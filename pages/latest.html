@@ -147,7 +147,7 @@
     <div>
       <div class="school-label">Excelsior Academy</div>
       <h1>School Email Hub</h1>
-      <div class="header-sub">Adam Scott &middot; 84 emails organized by priority</div>
+      <div class="header-sub">Adam Scott &middot; 86 emails organized by priority</div>
     </div>
     <div class="stats">
       <div class="stat-box urgent">
@@ -177,7 +177,7 @@
 <div class="save-toast" id="saveToast"></div>
 
 <script>
-const TODAY = new Date("2026-05-01");
+const TODAY = new Date("2026-05-02");
 
 const CAT_COLORS = {
   "\ud83d\udcda Grade 8 \u2014 Mrs. Heen":       { bg:"#fffbeb", border:"#f59e0b", accent:"#92400e", pill:"#fef3c7" },
@@ -280,6 +280,8 @@ const EMAILS = [
   { id:82, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Correction — Part 2", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"OOPS! That should be question #10! Please make the following correction/change to question #10 on the history test prep worksheet. It should read as follows: 10. What ruler of Bohemia was known for his kindness and generosity? — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Correction"] },
   { id:83, category:"📚 Grade 8 — Mrs. Heen", subject:"History Test Prep Answer Key — Email Mrs. Heen", from:"Tricia Heen", date:"Apr 29, 2026", deadline:null, urgent:false, body:"Parents, a reminder that if you want the answer key for the history prep questions, you must email Mrs. Heen directly. — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["History","Grade 8","Test Prep","Answer Key"] },
   { id:84, category:"📚 Grade 8 — Mrs. Heen", subject:"Homework Due 5/7 — Final Bible Test & Spelling Bee", from:"Tricia Heen", date:"Apr 30, 2026", deadline:"2026-05-07", urgent:false, body:"One week to go! Be ready for your final Bible test and take the Ch. 17 grammar test. Next week we will have a Spelling Bee with prizes for 1st-3rd place. Turn in any outstanding work. After lunch we'll have games and a sweet treat! — Mrs. Heen, 8th Grade Instructor, Excelsior Academy", tags:["Homework","Grade 8","Bible Final","Spelling Bee","Last Week"] },
+  { id:85, category:"🎭 Drama — Klaire Raines", subject:"Madagascar Jr. DVDs — Order by May 8", from:"Klaire Raines", date:"May 1, 2026", deadline:"2026-05-08", urgent:false, body:"Order a DVD of the Madagascar Jr. recording for $15 (or $15.50 via Venmo). Sign up via the Madagascar DVD Orders form. Orders due by Friday, May 8. Payment: exact cash or check to Mrs. Vickery this week, or via Venmo @Excelsior_Academy_SC ($15.50). A follow-up email will explain how to receive your DVD when ready. Also — last call to send in your student's ticket sales tally so the school can acknowledge those who worked hard promoting the show.", tags:["Drama","Madagascar Jr.","DVDs","💵 Order by May 8"] },
+  { id:86, category:"🏫 School-Wide — Excelsior", subject:"Family Picnic — May 9", from:"Nichole Coffey", date:"May 1, 2026", deadline:"2026-05-06", urgent:false, body:"Family picnic on Saturday, May 9 from 10am–1pm at Saluda Shoals Park (Cattail Shelter). Excelsior provides plates, napkins, utensils, and chicken — bring a side dish and a dessert to share. Bring bikes, play at the playground, and enjoy fellowship with other families. Parking is paid. Please RSVP by Wednesday, May 6 via the Family Picnic Sign Up form.", tags:["Event","Family Picnic","RSVP by May 6","May 9"] },
 ];
 
 let activeCategory = "ALL";
